@@ -12,8 +12,16 @@ class NotesApplication(object):
             content += self.content_format.format(i, self.note_list[i], self.author)
         return content
     def get(self, note_id):
-        #check valid id
-        return self.note_list[note_id]
+        if self.is_note_id(note_id):
+            return self.note_list[note_id]
+        else:
+            return False
+    def is_note_id(self, note_id):
+        try:
+            valid_id = self.note_list[int(note_id)]
+            return True
+        except (IndexError, ValueError):
+            return False
     def search(self, search_text):
         content = "Showing results for search "+search_text+"\n"
         found = 0
@@ -25,12 +33,17 @@ class NotesApplication(object):
             return "No Result found"
         return content
     def delete(self, note_id):
-        del(self.note_list[note_id])
-        return self
+        if self.is_note_id(note_id):
+            del(self.note_list[note_id])
+            return True
+        else:
+            return False
     def edit(self, note_id, new_content):
-        self.note_list[note_id] = new_content
-        return self
-
+        if self.is_note_id(note_id):
+            self.note_list[note_id] = new_content
+            return self
+        else:
+            return False
 '''
 malik_note = NotesApplication("Malik")
 
@@ -41,7 +54,7 @@ print(malik_note.create("Chidi is the instructor that gives all the instructions
 malik_note.edit(2, "Adim is over there, enjoying coding with all the programming experience")
 #print(malik_note.list())
 #malik_note.delete(2)
-print(malik_note.list())
+print(malik_note.is_note_id("hmamfej"))
 
 
 '''
