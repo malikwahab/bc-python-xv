@@ -11,13 +11,13 @@ def open_note(note_author):
     if note_id == 'all':
         return note_author.list()
     else:
-        note = note_author.get(int(note_id))
+        note = note_author.get(note_id)
         if not note:
             return "invalid Note id Entered"
         return note
 def delete_note(note_author):
     note_id = input("Enter id of note to be deleted:")
-    if note_author.delete(int(note_id)):
+    if note_author.delete(note_id):
         return "Note "+note_id+" deleted"
     return "Invalid Note Id entered"
     
@@ -29,8 +29,8 @@ def edit_note(note_author):
     if note_id == "":
         return "Enter an Id"
     elif note_author.is_note_id(note_id):
-        content = input("Enter new Content")
-        note_edit = note_author.edit(node_id, content)
+        content = input("Enter new Content:\n")
+        note_edit = note_author.edit(note_id, content)
         return "Note Edited"
     else:
         return "Invalid note Id entered"

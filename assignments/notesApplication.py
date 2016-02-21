@@ -13,7 +13,7 @@ class NotesApplication(object):
         return content
     def get(self, note_id):
         if self.is_note_id(note_id):
-            return self.note_list[note_id]
+            return self.note_list[int(note_id)]
         else:
             return False
     def is_note_id(self, note_id):
@@ -34,13 +34,13 @@ class NotesApplication(object):
         return content
     def delete(self, note_id):
         if self.is_note_id(note_id):
-            del(self.note_list[note_id])
+            del(self.note_list[int(note_id)])
             return True
         else:
             return False
     def edit(self, note_id, new_content):
         if self.is_note_id(note_id):
-            self.note_list[note_id] = new_content
+            self.note_list[int(note_id)] = new_content
             return self
         else:
             return False
